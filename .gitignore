@@ -1,6 +1,16 @@
 /target
 **/*.rs.bk
 Cargo.lock
+converted_logs/
+converted_logs_1/
+converted_logs_compressed/
+converted_logs_compressed_1/
+batch_convert.sh
+akochan/*
+*.mjai
+*.json.gz
+*.log
+scraw*.zip
 
 .vscode/
 

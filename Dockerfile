@@ -1,6 +1,6 @@
 # This Dockerfile only has akochan engine embedded.
 
-FROM rust:1.62.0
+FROM docker.io/rust:latest
 
 # install akochan deps
 RUN set -ex \
@@ -38,6 +38,8 @@ COPY . .
 
 RUN set -ex \
   && cargo build --release
+
+COPY tactics.json akochan
 
 
 ENTRYPOINT ["./target/release/mjai-reviewer"]
