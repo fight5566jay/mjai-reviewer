@@ -1,0 +1,10 @@
+#Example converting a tenhou log to mjai format
+podman run --rm \
+ -v /mnt/nfs/work/sctang/Projects/mjai-reviewer:/workspace \
+ localhost/mjai-reviewer \
+ -e akochan \
+ --no-open \
+ --no-review \
+ -t 2019050417gm-0029-0000-4f2a8622 \
+ -a 3 \
+ --mjai-out /workspace/converted_logs/2019050417gm-0029-0000-4f2a862.mjai

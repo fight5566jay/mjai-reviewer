@@ -1,0 +1,45 @@
+-- Clean version --
+# Converting tenhou log htmls to mjai
+./clean_cvt.sh > clean_conversion.log 2>&1 &
+
+# Check current progress
+ls -la converted_logs/*.mjai | wc -l
+
+# Monitor real-time activity  
+tail -f clean_conversion.log
+
+# Run monitoring script
+./monitor.sh
+
+# Check if process is still running
+ps aux | grep clean_cvt
+
+# Stop the process
+ps aux | grep -E "(clean_cvt|podman)" | grep -v grep
+pkill -f "clean_cvt.sh"
+ps aux | grep -E "(clean_cvt|podman)" | grep -v grep
+podman ps
+
+-- Batch version --
+# Converting tenhou log htmls to mjai
+rm batch_conversion.log
+nohup ./batch_cvt_compressed.sh \
+    tenhou_log_urls/log_htmls/tenhou_log_urls_2024_1.txt \
+    converted_logs_compressed 100 > batch_conversion.log 2>&1 &
+
+# Check current progress
+tail -f batch_conversion.log
+
+# Count completed files
+ls -la converted_logs/*.mjai | wc -l
+
+# Check if process is still running
+ps aux | grep batch_cvt_compressed
+
+# Stop the process
+ps aux | grep -E "batch_cvt_compressed" | grep -v grep
+pkill -f "batch_cvt_compressed.sh"
+# Use kill to stop the process entirely
+kill -9 <pid>
+ps aux | grep -E "batch_cvt_compressed" | grep -v grep
+podman ps
